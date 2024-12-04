@@ -4,6 +4,8 @@
 #define MOON_LED_LEVEL LED_LEVEL
 #define ML_SAFE_RANGE SAFE_RANGE
 
+bool is_alt_tab_active = false;
+
 enum custom_keycodes {
   RGB_SLD = ML_SAFE_RANGE,
   ALT_TAB,
