@@ -6,6 +6,7 @@
 
 enum custom_keycodes {
   RGB_SLD = ML_SAFE_RANGE,
+  ALT_TAB,
   HSV_189_255_255,
 };
 
@@ -49,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [2] = LAYOUT_voyager(
     KC_TILD,        KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,                                          KC_F6,          KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,         
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,KC_AUDIO_MUTE,  KC_TRANSPARENT,                                 KC_KP_7,        KC_KP_8,        KC_KP_9,        KC_KP_MINUS,    KC_KP_SLASH,    KC_F12,         
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,KC_AUDIO_MUTE,  ALT_TAB,                                 KC_KP_7,        KC_KP_8,        KC_KP_9,        KC_KP_MINUS,    KC_KP_SLASH,    KC_F12,         
     CW_TOGG,        KC_TRANSPARENT, KC_TRANSPARENT, LALT(KC_TAB),   KC_LEFT_ALT,    KC_SPACE,                                       KC_KP_4,        KC_KP_5,        KC_KP_6,        KC_KP_PLUS,     KC_KP_ASTERISK, KC_NUM,         
     KC_TRANSPARENT, TD(DANCE_10),   KC_MEDIA_PREV_TRACK,KC_MEDIA_NEXT_TRACK,KC_MEDIA_STOP,  KC_MEDIA_PLAY_PAUSE,                                KC_KP_1,        KC_KP_2,        KC_KP_3,        KC_DOT,         KC_KP_EQUAL,    QK_LLCK,        
                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_KP_0
@@ -175,6 +176,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         rgblight_sethsv(189,255,255);
       }
       return false;
+    case ALT_TAB:
+      if (record->event.pressed) {
+        if (!is_alt_tab_active) {
+          is_alt_tab_active = true;
+          register_code(KC_LALT);
+        }
+        register_code(KC_TAB);
+      } else {
+        unregister_code(KC_TAB);
+      }
+      break;
+    case MO(2):
+      if (is_alt_tab_active && !record->event.pressed) {
+        unregister_code(KC_LALT);
+        is_alt_tab_active = false;
+      }
   }
   return true;
 }
