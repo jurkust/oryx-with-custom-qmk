@@ -73,8 +73,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case MO(2):
-            return TAPPING_TERM -60;
         case TD(DANCE_10):
             return TAPPING_TERM + 840;
         default:
