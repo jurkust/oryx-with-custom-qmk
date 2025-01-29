@@ -36,9 +36,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
     KC_ESCAPE,      TD(DANCE_0),    TD(DANCE_1),    TD(DANCE_2),    TD(DANCE_3),    TD(DANCE_4),                                    TD(DANCE_5),    TD(DANCE_6),    TD(DANCE_7),    KC_9,           KC_0,           TD(DANCE_8),    
     KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,                                           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_MINUS,       
-    KC_LEFT_SHIFT,  KC_A,           KC_S,           KC_D,           MT(MOD_LALT, KC_F),KC_G,                                           KC_H,           LT(4,KC_J),     KC_K,           KC_L,           KC_SCLN,        MT(MOD_RSFT, KC_QUOTE),
+    KC_LEFT_SHIFT,  KC_A,           KC_S,           KC_D,           KC_F,           KC_G,                                           KC_H,           KC_J,           KC_K,           KC_L,           KC_SCLN,        MT(MOD_RSFT, KC_QUOTE),
     KC_LEFT_ALT,    KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           KC_M,           KC_COMMA,       KC_DOT,         TD(DANCE_9),    KC_RIGHT_ALT,   
-                                                    MT(MOD_LCTL, KC_BSPC),MO(2),                                          LT(3,KC_ENTER), KC_SPACE
+                                                    MT(MOD_LCTL, KC_BSPC),KC_LEFT_SHIFT,                                  LT(3,KC_ENTER), KC_SPACE
   ),
   [1] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_1,           KC_2,           KC_3,           KC_4,           KC_5,                                           KC_6,           KC_7,           KC_8,           KC_9,           KC_TRANSPARENT, KC_TRANSPARENT, 
@@ -48,15 +48,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                     KC_SPACE,       KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [2] = LAYOUT_voyager(
-    KC_TILD,        KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,                                          KC_F6,          KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,         
+    KC_TRANSPARENT, KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,                                          KC_F6,          KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,         
     KC_TRANSPARENT, KC_TRANSPARENT, KC_AUDIO_MUTE,  KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,KC_TRANSPARENT,                                 KC_KP_7,        KC_KP_8,        KC_KP_9,        KC_KP_MINUS,    KC_KP_SLASH,    KC_F12,         
-    CW_TOGG,        KC_TRANSPARENT, KC_TRANSPARENT, LALT(KC_TAB),   KC_LEFT_ALT,    KC_SPACE,                                       KC_KP_4,        KC_KP_5,        KC_KP_6,        KC_KP_PLUS,     KC_KP_ASTERISK, KC_NUM,         
+    CW_TOGG,        KC_TRANSPARENT, KC_TRANSPARENT, LALT(KC_TAB),   KC_TRANSPARENT, KC_SPACE,                                       KC_KP_4,        KC_KP_5,        KC_KP_6,        KC_KP_PLUS,     KC_KP_ASTERISK, KC_NUM,         
     KC_TRANSPARENT, TD(DANCE_10),   KC_MEDIA_STOP,  KC_MEDIA_PREV_TRACK,KC_MEDIA_NEXT_TRACK,KC_MEDIA_PLAY_PAUSE,                                KC_KP_1,        KC_KP_2,        KC_KP_3,        KC_DOT,         KC_KP_EQUAL,    QK_LLCK,        
                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_KP_0
   ),
   [3] = LAYOUT_voyager(
     KC_TRANSPARENT, RGB_TOG,        TOGGLE_LAYER_COLOR,RGB_MODE_FORWARD,RGB_VAD,        RGB_VAI,                                        KC_BRIGHTNESS_DOWN,KC_BRIGHTNESS_UP,LCTL(LSFT(KC_TAB)),LCTL(KC_TAB),   KC_BSPC,        KC_DELETE,      
-    KC_TRANSPARENT, KC_GRAVE,       KC_TRANSPARENT, KC_LBRC,        KC_RBRC,        KC_TAB,                                         KC_PAGE_UP,     KC_HOME,        KC_UP,          KC_END,         KC_PSCR,        KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_GRAVE,       KC_TILD,        KC_LBRC,        KC_RBRC,        KC_TRANSPARENT,                                 KC_PAGE_UP,     KC_HOME,        KC_UP,          KC_END,         KC_PSCR,        KC_NUBS,        
     KC_TRANSPARENT, AS_ON,          AS_OFF,         KC_LCBR,        KC_RCBR,        TD(DANCE_11),                                   KC_PGDN,        KC_LEFT,        KC_DOWN,        KC_RIGHT,       KC_TRANSPARENT, KC_GRAVE,       
     LSFT(KC_PC_UNDO),KC_PC_UNDO,     KC_PC_CUT,      KC_PC_COPY,     KC_PC_PASTE,    HSV_189_255_255,                                KC_QUES,        KC_TRANSPARENT, LALT(KC_SPACE), KC_TRANSPARENT, KC_BSLS,        QK_LLCK,        
                                                     MT(MOD_LALT, KC_BSPC),KC_LEFT_GUI,                                    KC_TRANSPARENT, KC_TRANSPARENT
@@ -73,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case MO(2):
+        case KC_LEFT_SHIFT:
             return TAPPING_TERM -60;
         case TD(DANCE_10):
             return TAPPING_TERM + 840;
@@ -254,15 +254,15 @@ void dance_11_reset(tap_dance_state_t *state, void *user_data) {
 }
 
 tap_dance_action_t tap_dance_actions[] = {
-        [DANCE_0] = ACTION_TAP_DANCE_TAP_HOLD(KC_1, KC_KP_1),
-        [DANCE_1] = ACTION_TAP_DANCE_TAP_HOLD(KC_2, KC_KP_2),
-        [DANCE_2] = ACTION_TAP_DANCE_TAP_HOLD(KC_3, KC_KP_3),
-        [DANCE_3] = ACTION_TAP_DANCE_TAP_HOLD(KC_4, KC_KP_4),
-        [DANCE_4] = ACTION_TAP_DANCE_TAP_HOLD(KC_5, KC_KP_5),
-        [DANCE_5] = ACTION_TAP_DANCE_TAP_HOLD(KC_6, KC_KP_6),
-        [DANCE_6] = ACTION_TAP_DANCE_TAP_HOLD(KC_7, KC_KP_7),
-        [DANCE_7] = ACTION_TAP_DANCE_TAP_HOLD(KC_8, KC_KP_8),
-        [DANCE_8] = ACTION_TAP_DANCE_TAP_HOLD(KC_EQUAL, RALT(KC_EQUAL)),
+        [DANCE_0] = ACTION_TAP_DANCE_TAP_HOLD(KC_1, LALT(LCTL(KC_1))),
+        [DANCE_1] = ACTION_TAP_DANCE_TAP_HOLD(KC_2, LALT(LCTL(KC_2))),
+        [DANCE_2] = ACTION_TAP_DANCE_TAP_HOLD(KC_3, LALT(LCTL(KC_3))),
+        [DANCE_3] = ACTION_TAP_DANCE_TAP_HOLD(KC_4, LALT(LCTL(KC_4))),
+        [DANCE_4] = ACTION_TAP_DANCE_TAP_HOLD(KC_5, LALT(LCTL(KC_5))),
+        [DANCE_5] = ACTION_TAP_DANCE_TAP_HOLD(KC_6, LALT(LCTL(KC_6))),
+        [DANCE_6] = ACTION_TAP_DANCE_TAP_HOLD(KC_7, LALT(LCTL(KC_7))),
+        [DANCE_7] = ACTION_TAP_DANCE_TAP_HOLD(KC_8, LALT(LCTL(KC_8))),
+        [DANCE_8] = ACTION_TAP_DANCE_TAP_HOLD(KC_EQUAL, LALT(LCTL(KC_EQUAL))),
         [DANCE_9] = ACTION_TAP_DANCE_TAP_HOLD(KC_SLASH, KC_BSLS),
         [DANCE_10] = ACTION_TAP_DANCE_TAP_HOLD(KC_Z, KC_SYSTEM_SLEEP),
         [DANCE_11] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_11_finished, dance_11_reset),
