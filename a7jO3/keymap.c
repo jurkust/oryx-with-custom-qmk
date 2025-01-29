@@ -59,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [3] = LAYOUT_voyager(
     KC_TRANSPARENT, RGB_TOG,        TOGGLE_LAYER_COLOR,RGB_MODE_FORWARD,RGB_VAD,        RGB_VAI,                                        KC_BRIGHTNESS_DOWN,KC_BRIGHTNESS_UP,LCTL(LSFT(KC_TAB)),LCTL(KC_TAB),   KC_BSPC,        KC_DELETE,      
-    KC_TRANSPARENT, KC_GRAVE,       KC_TILD,        KC_LBRC,        KC_RBRC,        KC_TRANSPARENT,                                 KC_PAGE_UP,     KC_HOME,        KC_UP,          KC_END,         KC_PSCR,        KC_NUBS,        
+    KC_TRANSPARENT, KC_GRAVE,       KC_TILD,        KC_LBRC,        KC_RBRC,        ALT_TAB,                                        KC_PAGE_UP,     KC_HOME,        KC_UP,          KC_END,         KC_PSCR,        KC_NUBS,        
     KC_TRANSPARENT, AS_ON,          AS_OFF,         KC_LCBR,        KC_RCBR,        TD(DANCE_11),                                   KC_PGDN,        KC_LEFT,        KC_DOWN,        KC_RIGHT,       KC_TRANSPARENT, KC_GRAVE,       
     LSFT(KC_PC_UNDO),KC_PC_UNDO,     KC_PC_CUT,      KC_PC_COPY,     KC_PC_PASTE,    HSV_189_255_255,                                KC_QUES,        KC_TRANSPARENT, LALT(KC_SPACE), KC_TRANSPARENT, KC_BSLS,        QK_LLCK,        
                                                     MT(MOD_LALT, KC_BSPC),KC_LEFT_GUI,                                    KC_TRANSPARENT, KC_TRANSPARENT
